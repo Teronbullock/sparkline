@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Target the latest ECMAScript version
+    "module": "ESNext", // Use the latest module system
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src", // Root directory of your source files
+    "strict": true, // Enable strict type-checking options
+    "esModuleInterop": true, // Enables interoperability between CommonJS and ES Modules
+    "moduleResolution": "Node", // Use Node module resolution algorithm
+    "allowSyntheticDefaultImports": true // Allow default imports from modules with no default export
+  },
+  "include": ["src/**/*.ts"], // Include all TypeScript files in the src directory
+  "exclude": ["node_modules"] // Exclude the node_modules directory
+}

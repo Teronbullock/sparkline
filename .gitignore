@@ -1,0 +1,11 @@
+// ingnore all mac and windows files
+**/.DS_Store
+**/Thumbs.db
+**/node_modules
+
+// ignore all .env files
+**/.env
+
+// ignore ssl certificates
+**/key.pem
+**/cert.pem
