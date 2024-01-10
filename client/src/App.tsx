@@ -10,24 +10,26 @@ import { UserContext } from './context/user-context.js';
 
 
 export default function App() {
-  const { isLoggedIn } = useContext(UserContext);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const { isLoggedIn, setIsLoggedIn, tokenInfo, setTokenInfo } = useContext(UserContext);
 
   useEffect(() => {
     const rawData = localStorage.getItem('userData');
     const storedData = rawData ? JSON.parse(rawData) : null;
-    
 
-  }, []);
+    if (storedData && storedData.token) {
+      setIsLoggedIn(true);
+      setTokenInfo(storedData.token);
+    }
+
+  }, [setIsLoggedIn, setTokenInfo, tokenInfo]);
 
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Registration />} />
-      <Route path="/login" element={<Login />} />
-      { isLoggedIn ? (<Route path="/dashboard" element={<Login />} />) : (null) }
-      <Route path="/dashboard" element={<Dashboard />} />
+      { isLoggedIn ? (null) : (<Route path="/login" element={<Login />} />) }
+      { isLoggedIn ? (<Route path="/dashboard" element={<Dashboard />} />) : (null) }
     </ Routes>
   )
 }
