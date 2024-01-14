@@ -6,7 +6,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import exercisesRouter from './routes/exercises-route.js';
+import { workoutRouter } from './routes/workout-route.js';
 import { userRouter } from './routes/user-route.js';
 // The port the server will run on
 const port = process.env.PORT || 5000;
@@ -28,7 +28,7 @@ if (uri) {
 else {
     console.log('unable to connect to MongoDB database, check the connection string');
 }
-app.use('/api/exercises', exercisesRouter);
+app.use('/api/workout', workoutRouter);
 app.use('/api/user', userRouter);
 // disable favicon requests
 app.use('/favicon.ico', (req, res, next) => {

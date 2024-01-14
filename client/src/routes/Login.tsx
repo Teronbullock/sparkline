@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/user-context";
+import Btn from "../components/btn/Btn";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -59,7 +60,10 @@ export default function Login() {
       <main>
         <section className="et-section bg-sky-600 text-white py-32 h-lvh">
           <div className="container mx-auto max-w-screen-md">
-            <h1 className="text-center xl:text-5xl">
+            <div className="flex justify-end px-8 text-3xl">
+              <Btn text="X" link="/" btnclass="text-white text-xl md:text-2xl xl:text-3xl hover:border-2" ariaLabel="back to home button" />
+            </div>
+            <h1 className="text-center md:text-3xl xl:text-5xl">
               Login
             </h1>
             <form className="container mx-auto mt-16 px-8" onSubmit={onSubmit} method="POST">
