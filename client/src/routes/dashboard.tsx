@@ -19,7 +19,7 @@ export default function Dashboard() {
     <>
       <Header />
       <main>
-        <section className='et-section bg-sky-600 text-white py-32'>
+        <section className='et-section bg-sl-blue text-white py-32'>
           <div className='container mx-auto max-w-screen-md'>
             <h1 className='text-center xl:text-5xl'>
               Dashboard
