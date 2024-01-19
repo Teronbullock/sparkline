@@ -18,15 +18,17 @@ export default function Header() {
   }
 
   return (
-    <header className='et-header'>
+    <header className='et-header px-4'>
       <div className='container 2xl mx-auto flex flow-row justify-between h-inherit content-center'>
         <div className='inline-flex flex-row items-center'>
           <a className='me-8' href='/'>
-            logo
+            <img src="src/assets/img/SprarkLine.webp" width='60' height='60' />
           </a>
           <Nav />
         </div>
-        <div className='inline-flex flex-row items-center'>
+        {/* create a mobile menu */}
+
+        <div className='hidden lg:inline-flex flex-row  items-center'>
         { isLoggedIn ? (
           <>
             <Link className='me-4' to='/dashboard'>Dashboard</Link>
