@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import { workoutRouter } from './routes/workout-route.js';
 import { userRouter } from './routes/user-route.js';
+import { exercisesRouter } from './routes/exercises-route.js';
 // The port the server will run on
 const port = process.env.PORT || 5000;
 const currentWorkingDirectory = process.cwd();
@@ -30,6 +31,7 @@ else {
 }
 app.use('/api/workout', workoutRouter);
 app.use('/api/user', userRouter);
+app.use('/api/exercises', exercisesRouter);
 // disable favicon requests
 app.use('/favicon.ico', (req, res, next) => {
     res.status(204).end();

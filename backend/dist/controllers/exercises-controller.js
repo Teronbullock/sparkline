@@ -1,0 +1,42 @@
+import { Exercises } from '../models/exercises-model.js';
+export const getExercise = async (req, res, next) => {
+    try {
+        const exercises = await Exercises.find();
+        if (exercises === null || exercises.length === 0) {
+            throw new Error('No exercises found');
+        }
+        res.status(200).json(exercises);
+    }
+    catch (error) {
+        let err = error;
+        err.status = 400;
+        next(err);
+    }
+};
+export const addExercise = async (req, res, next) => {
+    const { title, muscle_group, equipment, type } = req.body;
+    const hasMultiExercises = req.query.all;
+    try {
+        if (hasMultiExercises) {
+            await Exercises.insertMany(req.body);
+            console.log('all exercises were added');
+            res.status(200).json('all exercises were added');
+        }
+        else {
+            const exerciseObj = {
+                title,
+                muscle_group,
+                equipment,
+                type,
+            };
+            await Exercises.create(exerciseObj);
+            console.log('exercise added');
+            res.status(200).json('exercise added');
+        }
+    }
+    catch (error) {
+        let err = error;
+        err.status = 400;
+        next(err);
+    }
+};
