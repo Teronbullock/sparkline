@@ -11,6 +11,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero 
+          type='FrontPage'
           bgImgLabel="Hero Section with background image. Image of a person working out. This person's back is facing the camera, while they hold a bar with weights above their head. Photo by John Arano on Unsplash."
           heroContentClasses='container px-4 py-14 mx-auto'
         >
@@ -38,7 +39,7 @@ export default function Home() {
             </Column>
           </Columns>
         </Hero>
-        <section className='et-section bg-sky-600 text-white py-32'>
+        <section className='sl-section bg-sky-600 text-white py-32'>
           <Columns colsClasses='container mx-auto'>
             <Column>
               <div>
