@@ -9,7 +9,7 @@ export const Columns = ({ children, colsClasses } : ColumnsProps ) => {
   const classes = colsClasses ? colsClasses : '';
 
   return (
-    <div className={`et-columns flex ${classes}`}>
+    <div className={`sl-columns flex ${classes}`}>
       {children}
     </div>
   );
@@ -24,7 +24,7 @@ type ColumnProps = {
 export const Column = ({ children, colClasses }: ColumnProps ) => {
   const classes = colClasses ? colClasses : '';
   return(
-    <div className={`et-column basis-full ${classes}`}>
+    <div className={`sl-column basis-full ${classes}`}>
     {children}
     </div>
   );
