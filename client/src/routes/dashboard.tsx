@@ -1,7 +1,8 @@
 import { useContext } from 'react';
+import { UserContext } from '../context/user-context';
 import Header from '../components/Header/Header';
 import Footer from '../components//Footer/Footer';
-import { UserContext } from '../context/user-context';
+import Hero from '../components/Hero/Hero';
 
 
 export default function Dashboard() {
@@ -19,16 +20,11 @@ export default function Dashboard() {
     <>
       <Header />
       <main>
-        <section className='et-section bg-sl-blue text-white py-32'>
-          <div className='container mx-auto max-w-screen-md'>
-            <h1 className='text-center xl:text-5xl'>
-              Dashboard
-            </h1>
-            <p className='text-center mt-8'>
-              Welcome to the dashboard. Here you can track your exercises, set goals, and track your progress.
-            </p>
-          </div>
-        </section>
+        <Hero headerText='Dashboard'>
+          <p className='text-center mt-8'>
+            Welcome to the dashboard. Here you can track your exercises, set goals, and track your progress.
+          </p>
+        </Hero>
       </main>
       <Footer />
     </>

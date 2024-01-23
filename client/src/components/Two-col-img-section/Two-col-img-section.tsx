@@ -30,7 +30,7 @@ const TwoColImgSection = ({ leftColContent, rightColContent, sectionClasses, img
   }
 
   return (
-    <section className={`et-section ${classes}`}>
+    <section className={`sl-section ${classes}`}>
       <Columns colsClasses={`container mx-auto lg:flex-row items-center px-12 ${colsClasses}`}>
         <Column>
           {leftColContent}

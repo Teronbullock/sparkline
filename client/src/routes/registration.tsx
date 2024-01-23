@@ -32,10 +32,10 @@ export default function Registration() {
     try {
       if (
         formData.firstName !== '' &&
-       formData.lastName !== '' && 
-       formData.email !== '' && 
-       formData.password !== '' && 
-       formData.confirmPassword !== ''
+        formData.lastName !== '' && 
+        formData.email !== '' && 
+        formData.password !== '' && 
+        formData.confirmPassword !== ''
       ) {
 
         // Check if the passwords match
@@ -69,7 +69,7 @@ export default function Registration() {
     <>
       <Header />
       <main>
-        <section className="et-section bg-sky-600 text-white py-32">
+        <section className="sl-section bg-sky-600 text-white py-32">
           <div className="container mx-auto">
             <h1 className="text-center xl:text-5xl">
               Create an account
@@ -79,7 +79,7 @@ export default function Registration() {
             </p>
           </div>
         </section>
-        <section className="et-section bg-sky-500 text-white py-32">
+        <section className="sl-section bg-sky-500 text-white py-32">
           <div className="container mx-auto">
             <h2 className="text-center xl:text-4xl">
               Sign Up

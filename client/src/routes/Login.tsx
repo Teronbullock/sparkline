@@ -58,7 +58,7 @@ export default function Login() {
     <>
       <Header />
       <main>
-        <section className="et-section bg-sky-600 text-white py-32 h-lvh">
+        <section className="sl-section bg-sky-600 text-white py-32 h-lvh">
           <div className="container mx-auto max-w-screen-md">
             <div className="flex justify-end px-8 text-3xl">
               <Btn text="X" link="/" btnclass="text-white text-xl md:text-2xl xl:text-3xl hover:border-2" ariaLabel="back to home button" />

@@ -1,34 +1,42 @@
 import React, { useContext } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import './nav.scss';
 import { UserContext } from '../../context/user-context.js';
 
 
 export default function Nav() {
   const { isLoggedIn } = useContext(UserContext);
-  const [queryParameters] = useSearchParams();
-  const url = new URL(window.location.href);
-  // const { }
+  let { pathname } = useLocation();
 
-  console.log(new URL());
+  pathname = pathname.split('/')[1];
+
+
+
+
   return (
-    <nav className='et-nav items-center'>
+    <nav className='sl-nav items-center'>
       <ul className='flex flex-row justify-between items-center'>
-        { isLoggedIn ? (
-        
+        { isLoggedIn && pathname === 'dashboard' && (
           <>
             <li className='mr-4'>
-              <Link to='/'>Exercise Tracker {queryParameters.get("name")}</Link>
+              <Link to='/add-workout'>Add Workout</Link>
             </li>
             <li className='mr-4'>
-              <Link to='/'>Track Progress</Link>
-            </li>
-            <li className='mr-4'>
-              <Link to='/'>Set Goals</Link>
+              <Link to='/'>Workout History</Link>
             </li>
           </>
-        ) : (
+        )}
+        { isLoggedIn && pathname === 'add-workout' && (
           <>
+            <li className='mr-4'>
+              <Link to='/add-exercise'>Add Exercise</Link>
+            </li>
+            <li className='mr-4'>
+              <Link to=''>Reorder</Link>
+            </li>
+            <li className='mr-4'>
+              <Link to=''>Complete/Save</Link>
+            </li>
           </>
         )}
       </ul>
