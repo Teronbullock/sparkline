@@ -18,7 +18,7 @@ export default function Header() {
   }
 
   return (
-    <header className='et-header px-4'>
+    <header className='sl-header px-4'>
       <div className='container 2xl mx-auto flex flow-row justify-between h-inherit content-center'>
         <div className='inline-flex flex-row items-center'>
           <a className='me-8' href='/'>
