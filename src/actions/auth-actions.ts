@@ -1,13 +1,29 @@
 'use server';
 
+import { signIn, signOut, auth } from '@lib/auth';
+import { redirect } from 'next/dist/server/api-utils';
+
+// --------
+
 import { JSDOM } from 'jsdom';
 import DOMPurify from 'dompurify';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 import bcrypt from 'bcryptjs';
-import dbConnect from '@/lib/database';
-import User from '@/lib/models/user-model';
-import { RegisterFormSchema, LoginFormSchema, RegFormState, LoginFormState } from '@/lib/definitions';
-import { createSession, createRefreshSession, deleteSession } from '@/lib/session';
+import { getUserByEmail, createUser } from '@lib/user-dal';
+import { RegisterFormSchema, LoginFormSchema, RegFormState, LoginFormState } from '@lib/definitions';
+import { createSession, createRefreshSession, deleteSession, verifySession, verifyRefreshSession } from '@lib/session';
+
+// -----------
+
+export async function NextAuthLogin() {
+  await signIn('github', { redirectTo: '/dashboard' });
+}
+
+export async function NextAuthLogout() {
+  await signOut({ redirectTo: '/' });
+}
+
+/// -----
 
 // Initialize DOMPurify for Next.js (Node.js environment)
 const { window } = new JSDOM('');
@@ -15,10 +31,6 @@ const purify = DOMPurify(window);
 
 export async function signup(state: RegFormState, formData: FormData) {
   try {
-    // Connect to the database
-    await dbConnect();
-    console.log('Database connected');
-
     // get the form data
     const rawData = {
       firstName: String(formData.get('firstName') ?? ''),
@@ -52,7 +64,7 @@ export async function signup(state: RegFormState, formData: FormData) {
     };
 
     // Check if the user already exists in the database
-    const existingUser = await User.findOne({ email: sanitizedData.email });
+    const existingUser = await getUserByEmail(sanitizedData.email);
 
     if (existingUser) {
       return {
@@ -73,7 +85,8 @@ export async function signup(state: RegFormState, formData: FormData) {
     sanitizedData.password = hashedPassword;
 
     // Create the user in the database
-    const newUser = await User.create(sanitizedData);
+    const newUser = await createUser(sanitizedData);
+
     if (!newUser) {
       return {
         errors: { message: ['Error creating user'] },
@@ -91,7 +104,7 @@ export async function signup(state: RegFormState, formData: FormData) {
     // Create a refresh session for the new user
     await createRefreshSession(newUser._id);
   } catch (error) {
-    console.error('Signup error:', error); // Log for debugging
+    console.error('Signup error:', error);
 
     return {
       errors: {
@@ -105,15 +118,11 @@ export async function signup(state: RegFormState, formData: FormData) {
     };
   }
   // Redirect to the dashboard
-  redirect('/dashboard');
+  // redirect('/dashboard');
 }
 
 export async function login(state: LoginFormState, formData: FormData) {
   try {
-    // Connect to the database
-    await dbConnect();
-    console.log('Database connected');
-
     // get the form data
     const rawData = {
       email: String(formData.get('email') ?? ''),
@@ -140,7 +149,7 @@ export async function login(state: LoginFormState, formData: FormData) {
     };
 
     // Check if the user exists in the database
-    const existingUser = await User.findOne({ email: sanitizedData.email });
+    const existingUser = await getUserByEmail(sanitizedData.email);
 
     if (!existingUser) {
       console.log('Email does not exist');
@@ -155,6 +164,7 @@ export async function login(state: LoginFormState, formData: FormData) {
 
     // Check if the password is correct
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+
     if (!isPasswordValid) {
       console.log('Invalid password');
       return {
@@ -187,10 +197,46 @@ export async function login(state: LoginFormState, formData: FormData) {
     };
   }
 
-  redirect('/dashboard');
+  // redirect('/dashboard');
+}
+
+export async function isSessionVerified() {
+  const refreshSession = await verifyRefreshSession();
+  const session = await verifySession();
+
+  if (!session && !refreshSession) {
+    console.log('Session is invalid');
+    return false;
+  }
+
+  if (!session && refreshSession) {
+    const userId = refreshSession?.userId;
+
+    if (!userId) {
+      console.log('No userId found in refresh session');
+      return false;
+    }
+
+    await createSession(userId);
+    return true;
+  }
+
+  const isExpired = new Date(session?.expires as string | number) < new Date();
+
+  if (isExpired) {
+    console.log('Session is expired');
+    return false;
+  }
+
+  return true;
 }
 
 export async function logout() {
   deleteSession();
-  redirect('/');
+  // redirect('/');
 }
+
+export const getSession = async () => {
+  const session = await auth();
+  return session;
+};

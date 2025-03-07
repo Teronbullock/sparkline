@@ -1,10 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import Form from '@components/Form/Form';
-import Btn from '@components/btn/Btn';
-import { signup } from '@/app/actions/auth';
-import Input from '@components/Input/Input';
+import Form from '@/components/Form';
+import Btn from '@/app/components/Btn';
+import { signup } from '@/app/actions/auth-actions';
+import Input from '@/app/components/Input';
 
 export default function Registration() {
   const [state, action, pending] = useActionState(signup, undefined);

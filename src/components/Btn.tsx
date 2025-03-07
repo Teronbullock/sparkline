@@ -9,12 +9,14 @@ interface IBtn {
 interface IBtnLink extends IBtn {
   children?: React.ReactNode;
   link: string | URL;
+  onClick?: React.MouseEventHandler;
 }
 
 interface IBtnButton extends IBtn {
   children?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /**
@@ -23,9 +25,9 @@ interface IBtnButton extends IBtn {
  * @param param0
  * @returns
  */
-export default function Btn({ children, link, className, ariaLabel }: IBtnLink) {
+export default function Btn({ children, link, className, ariaLabel, onClick }: IBtnLink) {
   return (
-    <Link href={link} className={classNames('btn rounded', className)} aria-label={ariaLabel}>
+    <Link href={link} className={classNames('btn rounded', className)} aria-label={ariaLabel} onClick={onClick}>
       {children}
     </Link>
   );
@@ -35,9 +37,9 @@ export default function Btn({ children, link, className, ariaLabel }: IBtnLink) 
  * -- Btn with tag button
  */
 
-Btn.Button = function Button({ children, className, ariaLabel, type = 'button' }: IBtnButton) {
+Btn.Button = function Button({ children, className, ariaLabel, type = 'button', onClick }: IBtnButton) {
   return (
-    <button type={type} className={classNames('btn rounded', className)} aria-label={ariaLabel}>
+    <button type={type} className={classNames('btn rounded', className)} aria-label={ariaLabel} onClick={onClick}>
       {children}
     </button>
   );

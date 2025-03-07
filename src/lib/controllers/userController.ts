@@ -1,5 +1,5 @@
-import dbConnect from '@/lib/database';
-import User from '@/lib/models/user-model';
+import dbConnect from '@lib/database';
+import User from '@lib/models/user-model';
 import { NextResponse } from 'next/server';
 
 interface IpostUserLogin {

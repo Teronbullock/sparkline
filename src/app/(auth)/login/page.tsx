@@ -1,10 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import Form from '@components/Form/Form';
-import Btn from '@components/btn/Btn';
-import { login } from '@/app/actions/auth';
-import Input from '@components/Input/Input';
+import Form from '@/components/Form';
+import Btn from '@components/Btn';
+import { NextAuthLogin, login } from '@/actions/auth-actions';
+import Input from '@components/Input';
 
 export default function Login() {
   const [state, action, pending] = useActionState(login, undefined);
@@ -51,6 +51,18 @@ export default function Login() {
           >
             Login
           </Btn.Submit>
+          <div className='flex justify-between items-center mt-5 mb-2 w-[75%]'>
+            <div className='h-px bg-white w-full'></div>
+            <p className='p-3'>or</p>
+            <div className='h-px bg-white w-full'></div>
+          </div>
+          <Btn.Button
+            className='rounded-lg px-8 py-4 border-2 w-[75%] bg-white text-black'
+            ariaLabel='GitHub sign in button'
+            onClick={() => NextAuthLogin()}
+          >
+            Sign in With GitHub
+          </Btn.Button>
         </Form>
       </main>
     </>

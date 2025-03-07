@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-// import { Geist, Geist_Mono } from "next/font/google";
 import Header from '@components/layouts/Header';
 import Footer from '@components/layouts/Footer';
-import { UserProvider } from '@/app/context/userContext';
+import { UserProvider } from '@/context/userContext';
+import { auth } from '@lib/auth';
 
-import './globals.css';
-import './styles/main.scss';
+import '@/styles/globals.css';
+import '@/styles/scss/main.scss';
+// import { Geist, Geist_Mono } from "next/font/google";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -22,16 +23,18 @@ export const metadata: Metadata = {
   description: 'Track your fitness goals with SparkLine',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang='en'>
       <body className={` antialiased`}>
         <UserProvider>
-          <Header />
+          <Header session={session} />
           {children}
           <Footer />
         </UserProvider>

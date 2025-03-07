@@ -1,18 +1,21 @@
 'use client';
+
+import { Session } from 'next-auth';
 import { useState } from 'react';
-import logo from '/public/img/SprarkLine.webp';
-import { useUserContext } from '@/app/context/useUserContext';
+import logo from '/public/img/sparkline-logo.webp';
+import { useUserContext } from '@/context/useUserContext';
 import Image from 'next/image';
-import Nav from '@/app/components/layouts/Nav';
+import Nav from '@components/layouts/Nav';
 import Link from 'next/link';
 import MenuNavBtn from '@components/MenuNavBtn/MenuNavBtn';
+
 import classNames from 'classnames';
 import { set } from 'mongoose';
 
-export default function Header() {
+export default function Header({ session }: { session: Session | null }) {
   const [isToggled, setIsToggled] = useState(false);
 
-  const { isLoggedIn, setIsLoggedIn, setCurrentUser, setTokenInfo } = useUserContext();
+  // const { isLoggedIn, setIsLoggedIn, setCurrentUser, setTokenInfo } = useUserContext();
 
   // const handleLogout = () => {
   //   localStorage.removeItem('userData');
@@ -37,7 +40,7 @@ export default function Header() {
           <Image src={logo} className='w-[38px] h-[38px]' alt='Site logo' width='40' height='40' />
         </Link>
         <MenuNavBtn onClick={handleMobileMenu} isToggled={isToggled} />
-        <Nav isToggled={isToggled} navLinkHandler={navLinkHandler} />
+        <Nav isToggled={isToggled} navLinkHandler={navLinkHandler} session={session} />
       </div>
     </header>
   );
