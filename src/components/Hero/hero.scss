@@ -1,18 +1,18 @@
 .sl-hero__img {
   height: 100vh;
   width: 100%;
-  background: url(../../../../public/img/john-arano-h4i9G-de7Po-unsplash-640.webp) no-repeat 50% 50%;
+  background: url(/img/john-arano-h4i9G-de7Po-unsplash-640.webp) no-repeat 50% 50%;
   background-size: cover !important;
 
   @media (min-width: 768px) {
-    background: url(../../../../public/img/john-arano-h4i9G-de7Po-unsplash-1920.webp) no-repeat 50% 50%;
+    background: url(/img/john-arano-h4i9G-de7Po-unsplash-1920.webp) no-repeat 50% 50%;
   }
-  
+
   &--with-content {
     height: 60vh;
 
     @media (min-width: 768px) {
-      background: url(../../../../public/img/john-arano-h4i9G-de7Po-unsplash-1920.webp) no-repeat 50% 50%;
+      background: url(/img/john-arano-h4i9G-de7Po-unsplash-1920.webp) no-repeat 50% 50%;
     }
   }
 }

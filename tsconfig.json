@@ -23,7 +23,7 @@
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
-      "@actions/*": ["./src/app/actions/*"],
+      "@actions/*": ["./src/actions/*"],
       "@lib/*": ["./src/lib/*"]
     }
   },

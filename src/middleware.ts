@@ -8,10 +8,9 @@ export default async function middleware(req: NextRequest) {
   const protectedRoutes = ['/dashboard'];
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
+  const session = await auth();
 
   if (isProtectedRoute) {
-    const session = await auth();
-
     if (!session?.user) {
       return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
@@ -24,6 +23,10 @@ export default async function middleware(req: NextRequest) {
     // }
     // Update the session expiration time
     // const updatedSession = await updateSession();
+  }
+
+  if (path == '/' && session?.user) {
+    return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
   }
 
   return NextResponse.next();

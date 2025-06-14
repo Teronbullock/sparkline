@@ -1,10 +1,11 @@
 'use client';
 
 import { useActionState } from 'react';
-import Form from '@/components/Form';
-import Btn from '@/app/components/Btn';
-import { signup } from '@/app/actions/auth-actions';
-import Input from '@/app/components/Input';
+import Form from '@components/Form';
+import { BtnLink } from '@components/Btn/BtnLink';
+import { Btn } from '@components/Btn/Btn';
+import { signup } from '@actions/auth-actions';
+import Input from '@components/Input';
 
 export default function Registration() {
   const [state, action, pending] = useActionState(signup, undefined);
@@ -18,7 +19,7 @@ export default function Registration() {
       <main>
         <Form className='container mx-auto ring-gray-300 items-center relative' action={action}>
           <div className='mb-4 flex flex-col w-[75%]'>
-            <Btn.Close link='/' ariaLabel='back to home button' />
+            <BtnLink type='close' link='/' ariaLabel='back to home button' />
             <h2 className='text-center font-bold text-2xl mb-6'>Create Your Account</h2>
             <Input
               placeholder='First Name'
@@ -75,12 +76,13 @@ export default function Registration() {
               </ul>
             </div>
           )}
-          <Btn.Submit
+          <Btn
+            type='submit'
             disabled={pending}
             className='rounded-lg w-[75%] bg-red-600 px-8 py-4 text-white hover:border-2 hover:border-red-600 hover:bg-transparent hover:text-white'
           >
             Register
-          </Btn.Submit>
+          </Btn>
         </Form>
       </main>
     </>
